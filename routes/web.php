@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,5 +25,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard')->middleware('auth');
 });
+
+Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
