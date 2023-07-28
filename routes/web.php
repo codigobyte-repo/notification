@@ -25,8 +25,16 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard')->middleware('auth');
+    })->name('dashboard');
+
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+    Route::get('/messages/message', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+
 });
 
-Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
-Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+// Ruta para mostrar el formulario de inicio de sesión
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
