@@ -7,7 +7,7 @@
     <title>Redis</title>
 </head>
 <body>
-    <h1>Hola {{ $sender->name }}</h1>
+    <h1>Hola, {{ $sender->name }} te envió un mensaje</h1>
 
     <p>
         {{ $body }}

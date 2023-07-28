@@ -32,9 +32,8 @@ class MessageController extends Controller
         $data['sender_id'] = auth()->user()->id;
 
         $message = Message::create($data);
-        
-        /* Envío de correo */
 
+        /* Envío de correo */
         $recipient = User::find($data['recipient_id']);
         $recipient->notify(new MessageSent($message));
 

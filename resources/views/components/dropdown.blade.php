@@ -22,6 +22,10 @@ switch ($width) {
     case '48':
         $width = 'w-48';
         break;
+
+    case '64':
+        $width = 'w-64';
+        break;
 }
 @endphp
 
@@ -39,7 +43,7 @@ switch ($width) {
             x-transition:leave-end="transform opacity-0 scale-95"
             class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }} {{ $dropdownClasses }}"
             style="display: none;"
-            @click="open = false">
+            >
         <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
             {{ $content }}
         </div>

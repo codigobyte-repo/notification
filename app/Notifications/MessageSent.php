@@ -60,6 +60,10 @@ class MessageSent extends Notification implements ShouldQueue
 
     public function toDatabase(object $notifiable): array
     {
+
+        $notifiable->notification +=1;
+        $notifiable->save();
+
         $sender = User::find($this->message->sender_id);
 
         return [
@@ -67,16 +71,4 @@ class MessageSent extends Notification implements ShouldQueue
             'message' => "Has recibido un nuevo mensaje de " . $sender->name,
         ];
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    /* public function toArray(object $notifiable): array
-    {
-        return [
-            
-        ];
-    } */
 }
