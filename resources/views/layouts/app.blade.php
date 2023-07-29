@@ -41,5 +41,19 @@
         @stack('modals')
 
         @livewireScripts
+
+        @auth    
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+
+                    Echo.private('App.Models.User.' + {{ auth()->id() }})
+                    .notification((notification) => {
+                        console.log(notification.type);
+                    });
+                    
+                });
+            </script>
+        @endauth
+
     </body>
 </html>

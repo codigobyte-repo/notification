@@ -6,8 +6,10 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Broadcast;
 
 class MessageSent extends Notification implements ShouldQueue
 {
@@ -30,7 +32,7 @@ class MessageSent extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return ['mail', 'database'];
+        return ['mail', 'database', 'broadcast'];
     }
 
     /**
@@ -70,5 +72,10 @@ class MessageSent extends Notification implements ShouldQueue
             'url' => route('messages.show', $this->message),
             'message' => "Has recibido un nuevo mensaje de " . $sender->name,
         ];
+    }
+
+    public function toBroadcast(object $notifiable): BroadcastMessage
+    {
+        return new BroadcastMessage([]);
     }
 }

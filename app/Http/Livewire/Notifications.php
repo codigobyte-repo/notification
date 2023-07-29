@@ -8,6 +8,13 @@ class Notifications extends Component
 {
     public $count = 3;
 
+    public function getListeners()
+    {
+        return [
+            "echo-notification:App.Models.User." . auth()->id() . ',MessageSent' => 'render',
+        ];
+    }
+
     public function getNotificationsProperty()
     {
         return auth()->user()->notifications->take($this->count);
